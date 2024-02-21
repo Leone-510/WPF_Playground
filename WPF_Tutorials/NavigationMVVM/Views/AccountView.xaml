@@ -21,8 +21,9 @@
                Text="{Binding Name}"/>
 
         <Button Grid.Row="2" Margin="0 20 0 0" Padding="5 2"
-            HorizontalAlignment="Left"
-            Content="Home"/>
+                HorizontalAlignment="Left"
+                Command="{Binding NavigateHomeCommand}"
+                Content="Home"/>
 
     </Grid>
 </UserControl>
