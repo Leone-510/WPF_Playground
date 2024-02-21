@@ -2,18 +2,17 @@
 
 namespace NavigationMVVM.Commands
 {
-    public class CommandBase : ICommand
+    public abstract class CommandBase : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object? parameter)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual bool CanExecute(object parameter) => true;
 
-        public void Execute(object? parameter)
+        public abstract void Execute(object parameter);
+
+        protected void OnCanExecuteChanged()
         {
-            throw new NotImplementedException();
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }
