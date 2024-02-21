@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NavigationMVVM.ViewModels
+﻿namespace NavigationMVVM.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-
+        public string WelcomeMessage => "Home - Welcome message.";
     }
 }

@@ -6,7 +6,23 @@
              xmlns:local="clr-namespace:NavigationMVVM.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Account View usercontrol"/>
+    <Grid MaxWidth="1000" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+               FontSize="28"
+               Text="Account"/>
+
+        <TextBlock Grid.Row="1" Margin="0 20 0 0"
+               Text="{Binding Name}"/>
+
+        <Button Grid.Row="2" Margin="0 20 0 0" Padding="5 2"
+            HorizontalAlignment="Left"
+            Content="Home"/>
+
     </Grid>
 </UserControl>
