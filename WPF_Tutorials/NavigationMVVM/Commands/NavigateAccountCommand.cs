@@ -3,18 +3,18 @@ using NavigationMVVM.ViewModels;
 
 namespace NavigationMVVM.Commands
 {
-    public class NavigateHomeCommand : CommandBase
+    public class NavigateAccountCommand : CommandBase
     {
         private readonly NavigationStore _navigationStore;
 
-        public NavigateHomeCommand(NavigationStore navigationStore)
+        public NavigateAccountCommand(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
         }
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
+            _navigationStore.CurrentViewModel = new AccountViewModel(_navigationStore);
         }
     }
 }
