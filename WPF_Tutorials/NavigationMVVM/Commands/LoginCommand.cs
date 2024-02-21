@@ -19,7 +19,6 @@ namespace NavigationMVVM.Commands
         {
             MessageBox.Show($"Logging in {_viewModel.Username}...");
 
-            // Navigate to the Account page...
             _navigationStore.CurrentViewModel = new AccountViewModel(_navigationStore);
         }
     }

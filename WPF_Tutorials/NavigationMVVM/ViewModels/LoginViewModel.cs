@@ -34,8 +34,7 @@ namespace NavigationMVVM.ViewModels
 
         public LoginViewModel(NavigationStore navigationStore)
         {
-            LoginCommand = new NavigateCommand<AccountViewModel>(navigationStore,
-                () => new AccountViewModel(navigationStore));
+            LoginCommand = new LoginCommand(this, navigationStore);
         }
     }
 }
