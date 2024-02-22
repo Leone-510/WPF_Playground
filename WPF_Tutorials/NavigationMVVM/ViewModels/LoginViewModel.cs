@@ -34,16 +34,16 @@ namespace NavigationMVVM.ViewModels
         }
         #endregion
 
+
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel(NavigationStore navigationStore)
+        public LoginViewModel(AccountStore accountStore, NavigationStore navigationStore)
         {
-            ParameterNavigationService<Account, AccountViewModel> navigationService = 
-                new ParameterNavigationService<Account, AccountViewModel> (
-                    navigationStore,
-                    (parameter) => new AccountViewModel(parameter, navigationStore));
+            NavigationService<AccountViewModel> navigationService = new NavigationService<AccountViewModel>(
+                navigationStore,
+                () => new AccountViewModel(accountStore, navigationStore));
 
-            LoginCommand = new LoginCommand(this, navigationService);
+            LoginCommand = new LoginCommand(this, accountStore, navigationService);
 
         }
     }

@@ -1,5 +1,6 @@
 ﻿using NavigationMVVM.Models;
 using NavigationMVVM.Services;
+using NavigationMVVM.Stores;
 using NavigationMVVM.ViewModels;
 
 namespace NavigationMVVM.Commands
@@ -7,11 +8,13 @@ namespace NavigationMVVM.Commands
     public class LoginCommand : CommandBase
     {
         private readonly LoginViewModel _viewModel;
-        private readonly ParameterNavigationService<Account, AccountViewModel> _navigationService;
+        private readonly AccountStore _accountStore;
+        private readonly NavigationService<AccountViewModel> _navigationService;
 
-        public LoginCommand(LoginViewModel viewModel, ParameterNavigationService<Account, AccountViewModel> navigationService)
+        public LoginCommand(LoginViewModel viewModel, AccountStore accountStore, NavigationService<AccountViewModel> navigationService)
         {
             _viewModel = viewModel;
+            _accountStore = accountStore;
             _navigationService = navigationService;
         }
 
@@ -23,7 +26,9 @@ namespace NavigationMVVM.Commands
                 Username = _viewModel.Username
             };
 
-            _navigationService.Navigate(account);   // Navigate using the service, passing the account as parameter
+            _accountStore.CurrentAccount = account;
+
+            _navigationService.Navigate();   // Navigate using the ParameterNavigationService, if passing a parameter is required
         }
     }
 }
