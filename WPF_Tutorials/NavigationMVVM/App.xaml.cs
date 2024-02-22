@@ -19,6 +19,7 @@ namespace NavigationMVVM
             _accountStore = new AccountStore();
             _navigationStore = new NavigationStore();
             _navigationBarViewModel = new NavigationBarViewModel(
+                _accountStore,
                 CreateHomeNavigationService(),
                 CreateAccountNavigationService(),
                 CreateLoginNavigationService());
