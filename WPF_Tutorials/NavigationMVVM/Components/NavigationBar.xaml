@@ -33,6 +33,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
     <Grid MaxWidth="1000" Margin="20 10">
@@ -57,6 +58,7 @@
 
         <Button Grid.Column="3" Margin="10 0 0 0"
                 Command="{Binding NavigateAccountCommand}"
+                Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Content="Account"/>
     </Grid>
 </UserControl>
