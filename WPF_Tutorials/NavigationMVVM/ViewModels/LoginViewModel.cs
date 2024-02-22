@@ -1,5 +1,4 @@
 ﻿using NavigationMVVM.Commands;
-using NavigationMVVM.Models;
 using NavigationMVVM.Services;
 using NavigationMVVM.Stores;
 using System.Windows.Input;
