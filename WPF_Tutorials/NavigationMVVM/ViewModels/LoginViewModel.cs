@@ -1,4 +1,5 @@
 ﻿using NavigationMVVM.Commands;
+using NavigationMVVM.Models;
 using NavigationMVVM.Services;
 using NavigationMVVM.Stores;
 using System.Windows.Input;
@@ -7,6 +8,7 @@ namespace NavigationMVVM.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        #region Private Fields & Public Properties
         private string _userName;
 
         public string Username
@@ -30,13 +32,19 @@ namespace NavigationMVVM.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
+        #endregion
 
         public ICommand LoginCommand { get; }
 
         public LoginViewModel(NavigationStore navigationStore)
         {
-            LoginCommand = new LoginCommand(this, new NavigationService<AccountViewModel>(
-                navigationStore, () => new AccountViewModel(navigationStore)));
+            ParameterNavigationService<Account, AccountViewModel> navigationService = 
+                new ParameterNavigationService<Account, AccountViewModel> (
+                    navigationStore,
+                    (parameter) => new AccountViewModel(parameter, navigationStore));
+
+            LoginCommand = new LoginCommand(this, navigationService);
+
         }
     }
 }
