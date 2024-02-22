@@ -8,18 +8,12 @@ namespace NavigationMVVM.ViewModels
     public class AccountViewModel : ViewModelBase
     {
         private readonly AccountStore _accountStore;
-
         public string? Username => _accountStore.CurrentAccount?.Username;
         public string? Email => _accountStore.CurrentAccount?.Email;
-
-        public NavigationBarViewModel NavigationBarViewModel { get; set; }
-
         public ICommand NavigateHomeCommand { get; }
 
-        public AccountViewModel(NavigationBarViewModel navigationBarViewModel, 
-            AccountStore accountStore, NavigationService<HomeViewModel> homeNavigationService)
+        public AccountViewModel(AccountStore accountStore, INavigationService<HomeViewModel> homeNavigationService)
         {
-            NavigationBarViewModel = navigationBarViewModel;
             _accountStore = accountStore;
 
             NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
