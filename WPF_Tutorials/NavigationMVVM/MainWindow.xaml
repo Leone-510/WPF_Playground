@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NavigationMVVM"
         xmlns:views="clr-namespace:NavigationMVVM.Views"
-        xmlns:viewModels="clr-namespace:NavigationMVVM.ViewModels"
+        xmlns:viewModels="clr-namespace:NavigationMVVM.ViewModels" 
+        xmlns:components="clr-namespace:NavigationMVVM.Components"
         mc:Ignorable="d"
         Title="Navigation MVVM" Height="450" Width="800">
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type viewModels:LayoutViewModel}">
+                <components:Layout />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
                 <views:HomeView />
             </DataTemplate>
