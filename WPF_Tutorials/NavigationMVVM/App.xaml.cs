@@ -41,9 +41,10 @@ namespace NavigationMVVM
 
         private INavigationService<HomeViewModel> CreateHomeNavigationService()
         {
-            return new NavigationService<HomeViewModel>(
-                _navigationStore, 
-                () => new HomeViewModel(CreateLoginNavigationService()));
+            return new LayoutNavigationService<HomeViewModel>(
+                _navigationStore,
+                () => new HomeViewModel(CreateLoginNavigationService()),
+                _navigationBarViewModel);
         }
 
         private INavigationService<LoginViewModel> CreateLoginNavigationService()
@@ -55,9 +56,10 @@ namespace NavigationMVVM
 
         private INavigationService<AccountViewModel> CreateAccountNavigationService()
         {
-            return new NavigationService<AccountViewModel>(
+            return new LayoutNavigationService<AccountViewModel>(
                 _navigationStore,
-                () => new AccountViewModel(_accountStore, CreateHomeNavigationService()));
+                () => new AccountViewModel(_accountStore, CreateHomeNavigationService()),
+                _navigationBarViewModel);
         }
     }
 }
