@@ -12,17 +12,11 @@ namespace NavigationMVVM
     {
         private readonly AccountStore _accountStore;
         private readonly NavigationStore _navigationStore;
-        private readonly NavigationBarViewModel _navigationBarViewModel;
 
         public App()
         {
             _accountStore = new AccountStore();
             _navigationStore = new NavigationStore();
-            _navigationBarViewModel = new NavigationBarViewModel(
-                _accountStore,
-                CreateHomeNavigationService(),
-                CreateAccountNavigationService(),
-                CreateLoginNavigationService());
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -44,7 +38,7 @@ namespace NavigationMVVM
             return new LayoutNavigationService<HomeViewModel>(
                 _navigationStore,
                 () => new HomeViewModel(CreateLoginNavigationService()),
-                _navigationBarViewModel);
+                CreateNavigationBarViewModel);
         }
 
         private INavigationService<LoginViewModel> CreateLoginNavigationService()
@@ -59,7 +53,15 @@ namespace NavigationMVVM
             return new LayoutNavigationService<AccountViewModel>(
                 _navigationStore,
                 () => new AccountViewModel(_accountStore, CreateHomeNavigationService()),
-                _navigationBarViewModel);
+                CreateNavigationBarViewModel);
+        }
+
+        private NavigationBarViewModel CreateNavigationBarViewModel()
+        {
+            return new NavigationBarViewModel(_accountStore,
+                CreateHomeNavigationService(),
+                CreateAccountNavigationService(),
+                CreateLoginNavigationService());
         }
     }
 }
