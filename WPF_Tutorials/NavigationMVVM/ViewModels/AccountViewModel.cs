@@ -12,11 +12,11 @@ namespace NavigationMVVM.ViewModels
         public string? Email => _accountStore.CurrentAccount?.Email;
         public ICommand NavigateHomeCommand { get; }
 
-        public AccountViewModel(AccountStore accountStore, INavigationService<HomeViewModel> homeNavigationService)
+        public AccountViewModel(AccountStore accountStore, INavigationService homeNavigationService)
         {
             _accountStore = accountStore;
 
-            NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
+            NavigateHomeCommand = new NavigateCommand(homeNavigationService);
 
             // AccountStore references AccountViewModel.OnCurrentAccountChanged, so the
             // Garbage Colector can't clean up the view model (unsubscribe is required)
