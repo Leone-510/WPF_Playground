@@ -11,5 +11,12 @@
             ContentViewModel = contentViewModel;
         }
 
+        public override void Dispose()
+        {
+            ContentViewModel.Dispose();
+            NavigationBarViewModel.Dispose();
+
+            base.Dispose();
+        }
     }
 }
