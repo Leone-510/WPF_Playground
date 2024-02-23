@@ -15,6 +15,7 @@ public partial class App : Application
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<MainWindow>();
+                services.AddTransient<ChildForm>();
                 services.AddTransient<IDataAccess, DataAccess>();
             })
             .Build();

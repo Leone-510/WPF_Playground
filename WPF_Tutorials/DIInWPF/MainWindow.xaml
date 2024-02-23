@@ -14,7 +14,9 @@
 
             <Button x:Name="getData" Padding="20 10" 
                     Click="getData_Click">Get Data</Button>
-        
+
+            <Button x:Name="openChildForm" Padding="20 10" Click="openChildForm_Click">Open Child Form</Button>
+
         </StackPanel>
     </Grid>
 </Window>
