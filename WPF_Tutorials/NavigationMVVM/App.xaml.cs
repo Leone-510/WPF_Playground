@@ -45,8 +45,8 @@ namespace NavigationMVVM
 
         private INavigationService CreateLoginNavigationService()
         {
-            return new NavigationService<LoginViewModel>(
-                _navigationStore,
+            return new ModalNavigationService<LoginViewModel>(
+                _modalNavigationStore,
                 () => new LoginViewModel(_accountStore, CreateAccountNavigationService()));
         }
 
