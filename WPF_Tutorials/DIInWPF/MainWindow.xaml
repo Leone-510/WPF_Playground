@@ -4,9 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DIInWPF"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" FontSize="24"
+        Title="MainWindow" Height="300" Width="500">
     <Grid>
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
 
+            <TextBlock x:Name="data"/>
+
+            <Button x:Name="getData" Padding="20 10" 
+                    Click="getData_Click">Get Data</Button>
+        
+        </StackPanel>
     </Grid>
 </Window>
