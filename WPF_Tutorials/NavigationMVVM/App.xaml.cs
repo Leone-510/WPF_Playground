@@ -12,11 +12,13 @@ namespace NavigationMVVM
     {
         private readonly AccountStore _accountStore;
         private readonly NavigationStore _navigationStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
 
         public App()
         {
             _accountStore = new AccountStore();
             _navigationStore = new NavigationStore();
+            _modalNavigationStore = new ModalNavigationStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -26,7 +28,7 @@ namespace NavigationMVVM
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_navigationStore)
+                DataContext = new MainViewModel(_navigationStore, _modalNavigationStore)
             };
             MainWindow.Show();
 
