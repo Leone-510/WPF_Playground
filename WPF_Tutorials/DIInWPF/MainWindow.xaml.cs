@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DIInWPF.StartupHelpers;
+using System.Windows;
 using WpfClassLibrary;
 
 namespace DIInWPF;
@@ -6,14 +7,14 @@ namespace DIInWPF;
 public partial class MainWindow : Window
 {
     private readonly IDataAccess _dataAccess;
-    private readonly ChildForm _childForm; 
+    private readonly IAbstractFactory<ChildForm> _factory;
 
-
-    public MainWindow(IDataAccess dataAccess, ChildForm childForm)
+    public MainWindow(IDataAccess dataAccess, IAbstractFactory<ChildForm> factory)
     {
         InitializeComponent();
+
         _dataAccess = dataAccess;
-        _childForm = childForm;
+        _factory = factory;
     }
 
     private void getData_Click(object sender, RoutedEventArgs e)
@@ -23,6 +24,6 @@ public partial class MainWindow : Window
 
     private void openChildForm_Click(object sender, RoutedEventArgs e)
     {
-        _childForm.Show();
+        _factory.Create().Show();
     }
 }
