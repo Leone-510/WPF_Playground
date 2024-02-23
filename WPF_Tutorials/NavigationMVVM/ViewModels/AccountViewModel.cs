@@ -17,6 +17,28 @@ namespace NavigationMVVM.ViewModels
             _accountStore = accountStore;
 
             NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
+
+            // AccountStore references AccountViewModel.OnCurrentAccountChanged, so the
+            // Garbage Colector can't clean up the view model (unsubscribe is required)
+            _accountStore.CurrentAccountChanged += OnCurrentAccountChanged;
+        }
+
+        private void OnCurrentAccountChanged()
+        {
+            OnPropertyChanged(nameof(Username));
+            OnPropertyChanged(nameof(Email));
+        }
+
+        public override void Dispose()
+        {
+            _accountStore.CurrentAccountChanged -= OnCurrentAccountChanged;
+
+            base.Dispose();
+        }
+
+        ~AccountViewModel()
+        {
+            
         }
     }
 }
