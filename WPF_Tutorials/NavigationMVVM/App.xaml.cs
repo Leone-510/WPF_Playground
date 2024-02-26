@@ -34,7 +34,9 @@ namespace NavigationMVVM
             services.AddTransient<LoginViewModel>(CreateLoginViewModel);
 
             services.AddTransient<PeopleListingViewModel>(s => new PeopleListingViewModel(CreateAddPersonNavigationService(s)));
-            services.AddTransient<AddPersonViewModel>(s => new AddPersonViewModel());
+            services.AddTransient<AddPersonViewModel>(s => new AddPersonViewModel(
+                s.GetRequiredService<CloseModalNavigationService>()
+                ));
 
             //services.AddSingleton<NavigationBarViewModel>(CreateNavigationBarViewModel);
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
