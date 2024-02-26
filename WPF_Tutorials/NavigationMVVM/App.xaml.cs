@@ -2,7 +2,6 @@
 using NavigationMVVM.Services;
 using NavigationMVVM.Stores;
 using NavigationMVVM.ViewModels;
-using System;
 using System.Windows;
 
 namespace NavigationMVVM
@@ -19,6 +18,7 @@ namespace NavigationMVVM
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<AccountStore>();
+            services.AddSingleton<PeopleStore>();
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<ModalNavigationStore>();
 
@@ -33,10 +33,13 @@ namespace NavigationMVVM
 
             services.AddTransient<LoginViewModel>(CreateLoginViewModel);
 
-            services.AddTransient<PeopleListingViewModel>(s => new PeopleListingViewModel(CreateAddPersonNavigationService(s)));
+            services.AddTransient<PeopleListingViewModel>(s => new PeopleListingViewModel(
+                s.GetRequiredService<PeopleStore>(),
+                CreateAddPersonNavigationService(s)));
+            
             services.AddTransient<AddPersonViewModel>(s => new AddPersonViewModel(
-                s.GetRequiredService<CloseModalNavigationService>()
-                ));
+                s.GetRequiredService<PeopleStore>(),
+                s.GetRequiredService<CloseModalNavigationService>()));
 
             //services.AddSingleton<NavigationBarViewModel>(CreateNavigationBarViewModel);
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
