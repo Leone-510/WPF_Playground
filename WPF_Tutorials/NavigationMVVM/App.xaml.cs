@@ -33,7 +33,8 @@ namespace NavigationMVVM
 
             services.AddTransient<LoginViewModel>(CreateLoginViewModel);
 
-            services.AddTransient<PeopleListingViewModel>(s => new PeopleListingViewModel());
+            services.AddTransient<PeopleListingViewModel>(s => new PeopleListingViewModel(CreateAddPersonNavigationService(s)));
+            services.AddTransient<AddPersonViewModel>(s => new AddPersonViewModel());
 
             //services.AddSingleton<NavigationBarViewModel>(CreateNavigationBarViewModel);
             services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
@@ -44,6 +45,13 @@ namespace NavigationMVVM
                 DataContext = s.GetRequiredService<MainViewModel>()
             });
             _serviceProvider = services.BuildServiceProvider();
+        }
+
+        private INavigationService CreateAddPersonNavigationService(IServiceProvider serviceProvider)
+        {
+            return new ModalNavigationService<AddPersonViewModel>(
+                serviceProvider.GetRequiredService<ModalNavigationStore>(),
+                () => serviceProvider.GetRequiredService<AddPersonViewModel>());
         }
 
         private LoginViewModel CreateLoginViewModel(IServiceProvider serviceProvider)
