@@ -9,43 +9,34 @@ namespace Reservoom.ViewModels
     public class ReservationListingViewModel : ViewModelBase
     {
         private readonly ObservableCollection<ReservationViewModel> _reservations;
+        private readonly Hotel _hotel;
+
         public IEnumerable<ReservationViewModel> Reservations => _reservations;
 
 
         public ICommand MakeReservationCommand { get; }
 
-        public ReservationListingViewModel(
+        public ReservationListingViewModel(Hotel hotel,
             NavigationService makeReservationNavigationService)
         {
-            MakeReservationCommand = new NavigateCommand(makeReservationNavigationService);
-
+            _hotel = hotel;
             _reservations = new ObservableCollection<ReservationViewModel>();
 
-            #region Adding dummy data
-            _reservations.Add(
-                new ReservationViewModel(
-                    new Reservation(
-                        new RoomID(1, 2),
-                            "Leone",
-                            DateTime.Now,
-                            DateTime.Now.AddDays(5))));
+            MakeReservationCommand = new NavigateCommand(makeReservationNavigationService);
 
-            _reservations.Add(
-                new ReservationViewModel(
-                    new Reservation(
-                        new RoomID(3, 2),
-                            "Joe",
-                            DateTime.Now,
-                            DateTime.Now)));
+            UpdateReservations();
+        }
 
-            _reservations.Add(
-                new ReservationViewModel(
-                    new Reservation(
-                        new RoomID(2, 4),
-                            "May",
-                            DateTime.Now,
-                            DateTime.Now)));
-            #endregion
+        private void UpdateReservations()
+        {
+            _reservations.Clear();
+
+            foreach (Reservation reservation in _hotel.GetAllReservations())
+            {
+                ReservationViewModel reservationViewModel = new ReservationViewModel(reservation);
+
+                _reservations.Add(reservationViewModel);
+            }
         }
     }
 }
