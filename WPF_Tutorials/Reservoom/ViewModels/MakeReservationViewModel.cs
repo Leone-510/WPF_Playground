@@ -1,4 +1,5 @@
 ﻿using Reservoom.Commands;
+using Reservoom.Models;
 using System.Windows.Input;
 
 namespace Reservoom.ViewModels
@@ -63,9 +64,9 @@ namespace Reservoom.ViewModels
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public MakeReservationViewModel()
+        public MakeReservationViewModel(Hotel hotel)
         {
-            SubmitCommand = new MakeReservationCommand();
+            SubmitCommand = new MakeReservationCommand(this, hotel);
         }
     }
 }
