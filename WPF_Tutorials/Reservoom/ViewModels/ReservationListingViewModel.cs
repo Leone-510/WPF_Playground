@@ -1,5 +1,6 @@
 ﻿using Reservoom.Commands;
 using Reservoom.Models;
+using Reservoom.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -13,10 +14,10 @@ namespace Reservoom.ViewModels
 
         public ICommand MakeReservationCommand { get; }
 
-        public ReservationListingViewModel()
+        public ReservationListingViewModel(NavigationStore navigationStore)
         {
             _reservations = new ObservableCollection<ReservationViewModel>();
-            MakeReservationCommand = new NavigateCommand();
+            MakeReservationCommand = new NavigateCommand(navigationStore);
 
             #region Adding dummy data
             _reservations.Add(
