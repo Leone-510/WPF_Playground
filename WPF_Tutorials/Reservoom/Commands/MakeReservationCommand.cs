@@ -1,6 +1,7 @@
 ﻿using Reservoom.Exceptions;
 using Reservoom.Models;
 using Reservoom.ViewModels;
+using System.ComponentModel;
 using System.Windows;
 
 namespace Reservoom.Commands
@@ -14,6 +15,15 @@ namespace Reservoom.Commands
         {
             _makeReservationViewModel = makeReservationViewModel;
             _hotel = hotel;
+
+            _makeReservationViewModel.PropertyChanged += OnViewModelPropertyChanged;
+        }
+
+        public override bool CanExecute(object? parameter)
+        {
+            return !string.IsNullOrEmpty(_makeReservationViewModel.Username) &&
+                _makeReservationViewModel.FloorNumber > 0 &&
+                base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
@@ -35,6 +45,15 @@ namespace Reservoom.Commands
             {
                 MessageBox.Show("This room is already taken.", "Error", 
                     MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(MakeReservationViewModel.Username) ||
+                e.PropertyName == nameof(MakeReservationViewModel.FloorNumber))
+            {
+                OnCanExecuteChanged();
             }
         }
     }
