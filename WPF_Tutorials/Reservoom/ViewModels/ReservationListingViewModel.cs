@@ -1,4 +1,5 @@
-﻿using Reservoom.Models;
+﻿using Reservoom.Commands;
+using Reservoom.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -15,6 +16,7 @@ namespace Reservoom.ViewModels
         public ReservationListingViewModel()
         {
             _reservations = new ObservableCollection<ReservationViewModel>();
+            MakeReservationCommand = new NavigateCommand();
 
             #region Adding dummy data
             _reservations.Add(
