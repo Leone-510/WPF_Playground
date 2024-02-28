@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reservoom.Exceptions;
+﻿using Reservoom.Exceptions;
 
 namespace Reservoom.Models
 {
@@ -25,9 +20,9 @@ namespace Reservoom.Models
         /// </summary>
         /// <param name="username">The username of the user</param>
         /// <returns>The reservations for the user</returns>
-        public IEnumerable<Reservation> GetReservationsForUser(string username)
+        public IEnumerable<Reservation> GetAllReservations()
         {
-            return _reservationBook.GetAllReservationsForUser(username);
+            return _reservationBook.GetAllReservations();
         }
 
         /// <summary>
