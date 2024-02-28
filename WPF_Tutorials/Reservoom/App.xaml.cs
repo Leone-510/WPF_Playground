@@ -1,4 +1,5 @@
 ﻿using Reservoom.Models;
+using Reservoom.Stores;
 using Reservoom.ViewModels;
 using System.Windows;
 
@@ -10,17 +11,21 @@ namespace Reservoom
     public partial class App : Application
     {
         private readonly Hotel _hotel;
+        private readonly NavigationStore _navigationStore;
 
         public App()
         {
             _hotel = new Hotel("Leone Suites");
+            _navigationStore = new NavigationStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            _navigationStore.CurrentViewModel = new ReservationListingViewModel();
+
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_hotel)
+                DataContext = new MainViewModel(_navigationStore)
             };
             MainWindow.Show();
 
